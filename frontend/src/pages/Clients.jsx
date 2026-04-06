@@ -10,7 +10,7 @@ const STATUS_TABS = ['All', 'Lead', 'Contacted', 'Proposal Sent', 'Won', 'Lost']
 function ClientForm({ initial = {}, onSubmit, loading }) {
   const [form, setForm] = useState({
     name: '', email: '', phone: '', company: '', website: '',
-    status: 'Lead', tags: '', source: 'Other', ...initial,
+    status: 'Lead', source: 'Other', ...initial,
     tags: initial.tags?.join(', ') || '',
   });
 
