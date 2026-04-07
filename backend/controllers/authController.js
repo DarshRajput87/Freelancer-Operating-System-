@@ -61,7 +61,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email }).select('+password');
+  const user = await User.findOne({ email }).select('+password +settings.geminiApiKey');
   if (!user) {
     return res.status(401).json({ success: false, message: 'Invalid credentials' });
   }
@@ -83,7 +83,7 @@ const login = async (req, res) => {
  * @access  Private
  */
 const getMe = async (req, res) => {
-  const user = await User.findById(req.user.id);
+  const user = await User.findById(req.user.id).select('+settings.geminiApiKey');
   res.status(200).json({ success: true, data: user });
 };
 
@@ -97,7 +97,7 @@ const updateProfile = async (req, res) => {
   const updates = {};
   allowedFields.forEach((f) => { if (req.body[f] !== undefined) updates[f] = req.body[f]; });
 
-  const user = await User.findByIdAndUpdate(req.user.id, updates, { new: true, runValidators: true });
+  const user = await User.findByIdAndUpdate(req.user.id, updates, { new: true, runValidators: true }).select('+settings.geminiApiKey');
   res.status(200).json({ success: true, data: user });
 };
 

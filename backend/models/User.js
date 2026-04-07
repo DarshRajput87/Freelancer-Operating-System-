@@ -112,7 +112,7 @@ UserSchema.methods.toJSON = function () {
 // Static methods for API key encryption
 UserSchema.statics.setApiKey = async function (userId, apiKey) {
   const encrypted = apiKey ? encrypt(apiKey) : '';
-  return this.findByIdAndUpdate(userId, { 'settings.geminiApiKey': encrypted }, { new: true });
+  return this.findByIdAndUpdate(userId, { 'settings.geminiApiKey': encrypted }, { new: true }).select('+settings.geminiApiKey');
 };
 
 UserSchema.statics.getApiKey = async function (userId) {
