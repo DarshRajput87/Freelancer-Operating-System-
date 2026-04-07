@@ -25,7 +25,7 @@ const callAI = async ({ userId, type, messages, refProject, refClient, userApiKe
   try {
     const isJson = type === 'analyze' || type === 'tasks' || type === 'proposal';
     const model = genAI.getGenerativeModel({
-      model: 'gemini-flash-latest',
+      model: 'gemini-1.5-flash',
       generationConfig: isJson ? { responseMimeType: 'application/json' } : undefined,
     });
 
@@ -49,7 +49,7 @@ const callAI = async ({ userId, type, messages, refProject, refClient, userApiKe
       type,
       input: userMessage,
       output,
-      model: 'gemini-flash-latest',
+      model: 'gemini-1.5-flash',
       tokensUsed: {
         prompt: 0,
         completion: 0,
